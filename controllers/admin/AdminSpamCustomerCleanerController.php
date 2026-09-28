@@ -1,0 +1,121 @@
+<?php
+/**
+ * SpamCustomerCleaner - PrestaShop Module
+ *
+ * @author    Genisoft web
+ * @copyright 2026 Genisoft web
+ * @license   Commercial / Proprietary
+ */
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+require_once _PS_MODULE_DIR_ . 'spamcustomercleaner/classes/SpamDetector.php';
+
+class AdminSpamCustomerCleanerController extends ModuleAdminController
+{
+    public function __construct()
+    {
+        $this->bootstrap = true;
+        parent::__construct();
+    }
+
+    public function initContent()
+    {
+        parent::initContent();
+
+        // Redirect to module configuration or render module content
+        $module = Module::getInstanceByName('spamcustomercleaner');
+        if ($module) {
+            $this->content = $module->getContent();
+            $this->context->smarty->assign(['content' => $this->content]);
+        }
+    }
+
+    /**
+     * AJAX Action: Run full scan
+     */
+    public function ajaxProcessScan()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        try {
+            $criteria = SpamDetector::getDefaultCriteria();
+            $scanResult = SpamDetector::scan($criteria);
+
+            die(json_encode([
+                'success' => true,
+                'total_scanned' => $scanResult['total_scanned'],
+                'spam_count' => $scanResult['spam_count'],
+                'clean_count' => $scanResult['clean_count'],
+                'spam_with_addr' => $scanResult['spam_with_addr'],
+                'items' => $scanResult['items'],
+            ]));
+        } catch (Exception $e) {
+            die(json_encode([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]));
+        }
+    }
+
+    /**
+     * AJAX Action: Delete a batch of customer IDs
+     */
+    public function ajaxProcessDeleteBatch()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        try {
+            $customerIds = Tools::getValue('customer_ids');
+            $deleteAddresses = (bool) Tools::getValue('delete_addresses', 1);
+
+            if (empty($customerIds) || !is_array($customerIds)) {
+                die(json_encode([
+                    'success' => false,
+                    'error' => 'Aucun identifiant client transmis pour la suppression.',
+                ]));
+            }
+
+            $res = SpamDetector::deleteBatch($customerIds, $deleteAddresses);
+
+            die(json_encode($res));
+        } catch (Exception $e) {
+            die(json_encode([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]));
+        }
+    }
+
+    /**
+     * AJAX Action: Delete a single customer
+     */
+    public function ajaxProcessDeleteSingle()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        try {
+            $idCustomer = (int) Tools::getValue('id_customer');
+            $deleteAddresses = (bool) Tools::getValue('delete_addresses', 1);
+
+            if ($idCustomer <= 0) {
+                die(json_encode(['success' => false, 'error' => 'ID client invalide.']));
+            }
+
+            $res = SpamDetector::deleteBatch([$idCustomer], $deleteAddresses);
+
+            die(json_encode([
+                'success' => true,
+                'customers_deleted' => $res['customers_deleted'],
+                'addresses_deleted' => $res['addresses_deleted'],
+            ]));
+        } catch (Exception $e) {
+            die(json_encode([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]));
+        }
+    }
+}

@@ -28,7 +28,7 @@ class SpamCustomerCleaner extends Module
 
         $this->displayName = $this->l('Scanner & Nettoyeur Anti-Spam Clients');
         $this->description = $this->l('Détecte avec précision et supprime en masse les faux comptes spam et leurs adresses sans risque pour vos vrais clients.');
-        $this->ps_versions_compliancy = ['min' => '1.7.0.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '1.7.0.0', 'max' => '9.99.99'];
     }
 
     public function install()

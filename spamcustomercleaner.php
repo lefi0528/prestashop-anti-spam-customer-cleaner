@@ -51,7 +51,7 @@ class SpamCustomerCleaner extends Module
             'SCC_WHITELIST' => "lefi0\ngenisoft\nadmin\nbiggyfood",
             'SCC_BATCH_SIZE' => 250,
             'SCC_HONEYPOT_ACTIVE' => 1,
-            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/',
+            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/b/kCO5W',
             'SCC_SECURITY_URL' => 'https://shop.genisoft.fr/b/et2gH',
             'SCC_FEXA_URL' => 'https://fexaai.com/',
         ];
@@ -314,8 +314,8 @@ class SpamCustomerCleaner extends Module
         }
 
         $shopUrl = Configuration::get('SCC_SHOP_URL');
-        if (empty($shopUrl)) {
-            $shopUrl = 'https://shop.genisoft.fr/';
+        if (empty($shopUrl) || $shopUrl === 'https://shop.genisoft.fr/') {
+            $shopUrl = 'https://shop.genisoft.fr/b/kCO5W';
         }
 
         $securityUrl = Configuration::get('SCC_SECURITY_URL');

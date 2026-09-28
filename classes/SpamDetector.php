@@ -150,7 +150,7 @@ class SpamDetector
         $ln = trim(isset($c['lastname']) ? $c['lastname'] : '');
         $fullName = $fn . ' ' . $ln;
 
-        // Safety 2: Whitelist protection
+        // Safety 2: Whitelist protection from configuration
         if (!empty($criteria['whitelist'])) {
             $whitelistTerms = preg_split('/[\r\n,]+/', $criteria['whitelist']);
             foreach ($whitelistTerms as $term) {
@@ -161,21 +161,67 @@ class SpamDetector
             }
         }
 
-        // Rule 1: URLs or domain names in firstname or lastname
+        // Safety 3: Marketplace connectors protection (Amazon, eBay, Mirakl, Common-Services, Cdiscount, Fnac, etc.)
+        $marketplaceRegex = '/(@.*(marketplace\.amazon|amazon\.|members\.ebay|ebay\.|mirakl|common-services\.com|cdiscount\.|fnac\.|darty\.|rakuten\.|priceminister\.|manomano\.|backmarket\.|zalando\.|laredoute\.|conforama\.|carrefour\.|leroymerlin\.|aliexpress\.|bol\.com|kaufland\.))/i';
+        if (preg_match($marketplaceRegex, $email)) {
+            return false;
+        }
+
+        // Safety 4: Institutional & Academic domains (.gouv.fr, univ-*.fr, cnrs.fr, inserm, etc.)
+        $institutionalRegex = '/(@.*(univ-[a-z0-9-]+\.fr|\.gouv\.fr|\.gov|\.ac\.[a-z]{2}|\.cnrs\.fr|\.asso\.fr|\.inserm\.fr|\.inrae\.fr|\.cea\.fr|sorbonne|pasteur))/i';
+        if (preg_match($institutionalRegex, $email)) {
+            return false;
+        }
+
+        // Safety 5: Common French B2B company acronyms in firstname/lastname (CNRS, SARL, SAS, SCI, etc.)
+        $b2bAcronym = '/^(CNRS|SARL|SAS|SASU|EURL|SCI|BTP|SNC|GIE|CHU|INRA|INRAE|CERN|EPFL|EDF|SNCF|RATP|APHP)$/i';
+        if (preg_match($b2bAcronym, trim($fn)) || preg_match($b2bAcronym, trim($ln))) {
+            return false;
+        }
+
+        $hardReasons = [];
+        $softReasons = [];
+
+        // HARD RULE 1: URLs or domain names in firstname or lastname (Always 100% spam)
         if (!empty($criteria['check_urls'])) {
-            if (preg_match('/(http|https|www\.|\.com|\.ru|\.es|\.us|\.ly|\.top|\.xyz|\.link|\.club|\.online|\.site|\.vip|\.info|\.me\/)/i', $fullName)) {
-                $reasons[] = 'Lien publicitaire ou URL dans le nom';
+            if (preg_match('/(http:\/\/|https:\/\/|www\.|\.com\/|\.ru\/|\.es\/|\.us\/|\.ly\/|\.top\/|\.xyz\/|\.link\/|\.club\/|\.online\/|\.site\/|\.vip\/|\.info\/|\.me\/)/i', $fullName) ||
+                preg_match('/\b[a-zA-Z0-9-]{3,}\.(com|net|org|ru|top|xyz|link|site|online|vip|es|cn)\b/i', $fullName)) {
+                $hardReasons[] = 'Lien publicitaire ou URL dans le nom';
             }
         }
 
-        // Rule 2: Spam keywords in name (dating, sexy, casino...)
+        // HARD RULE 2: Porn, dating, casino, adult keywords (Always 100% spam)
         if (!empty($criteria['check_keywords'])) {
-            if (preg_match('/(dating|waiting for you|wants to meet|wants to date|meet women|meet girls|sexy|casino|viagra|porn|escort|hookup)/i', $fullName)) {
-                $reasons[] = 'Mots-clés de spam (dating/rencontre/adulte)';
+            if (preg_match('/\b(dating|waiting for you|wants to meet|wants to date|meet women|meet girls|sexy|casino|viagra|porn|escort|hookup|cams|adult)\b/i', $fullName)) {
+                $hardReasons[] = 'Mots-clés de spam (dating/rencontre/adulte)';
             }
         }
 
-        // Rule 3: CamelCase / Mixed Case bot patterns (e.g. GJfwUoNDU, oDglEQIqBVVMI, kAgLLaqWZpqInsg)
+        // HARD RULE 3: Disposable / throwaway email services (Always 100% spam)
+        if (!empty($criteria['check_disposable'])) {
+            if (preg_match('/@(test\.fr|example\.com|mailinator\.com|trashmail\.|guerrillamail\.|10minutemail\.|tempmail\.|dispostable\.|yopmail\.|sharklasers\.|fakeinbox\.)/i', $email)) {
+                $hardReasons[] = 'Email jetable ou domaine de test';
+            }
+        }
+
+        // HARD RULE 4: Suspicious spammer TLDs (.ru, .su, .xyz, .top, .click, etc.)
+        if (!empty($criteria['check_tlds'])) {
+            if (preg_match('/\.(ru|su|xyz|top|click|link|work|loan|date|ml|ga|cf|gq)$/i', $email)) {
+                $tld = substr(strrchr($email, '.'), 1);
+                $hardReasons[] = 'Extension de domaine à haut risque (.' . $tld . ')';
+            }
+        }
+
+        // HARD RULE 5: Explicit test/fake names
+        if (!empty($criteria['check_same_name'])) {
+            if (mb_strtolower($fn, 'UTF-8') === mb_strtolower($ln, 'UTF-8') && mb_strlen($fn, 'UTF-8') >= 4) {
+                if (preg_match('/^(test|demo|admin|fake|asdf|qwerty)$/i', $fn)) {
+                    $hardReasons[] = 'Nom et prénom de test suspects (' . $fn . ')';
+                }
+            }
+        }
+
+        // SOFT RULE 1: CamelCase / Mixed Case bot patterns (e.g. GJfwUoNDU, oDglEQIqBVVMI)
         if (!empty($criteria['check_mixed_case'])) {
             $isMixed = false;
             if (preg_match('/[a-z]{1,}[A-Z]{1,}[a-z]{1,}[A-Z]/', $fn) || preg_match('/[a-z]{1,}[A-Z]{1,}[a-z]{1,}[A-Z]/', $ln) ||
@@ -188,19 +234,21 @@ class SpamDetector
                 }
             }
             if ($isMixed) {
-                $reasons[] = 'Alternance majuscules/minuscules aléatoire (Bot)';
+                $softReasons[] = 'Alternance majuscules/minuscules aléatoire (Bot)';
             }
         }
 
-        // Rule 4: Consecutive consonants (5+ consonants in name)
+        // SOFT RULE 2: Consecutive consonants (6+ consonants, ignoring standard phonemes sch, tch, cht, ght, ph, th)
         if (!empty($criteria['check_consonants'])) {
-            $consonantsRegex = '/[bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZ]{5,}/u';
-            if (preg_match($consonantsRegex, $fn) || preg_match($consonantsRegex, $ln)) {
-                $reasons[] = '5+ consonnes consécutives (Inintelligible)';
+            $fnClean = preg_replace('/(sch|tch|cht|ght|ph|th|ck)/iu', 'x', $fn);
+            $lnClean = preg_replace('/(sch|tch|cht|ght|ph|th|ck)/iu', 'x', $ln);
+            $consonantsRegex = '/[bcdfghjklmnpqrstvwxzBCDFGHJKLMNPQRSTVWXZ]{6,}/u';
+            if (preg_match($consonantsRegex, $fnClean) || preg_match($consonantsRegex, $lnClean)) {
+                $softReasons[] = 'Suite anormale de consonnes (Inintelligible)';
             }
         }
 
-        // Rule 5: Low vowel ratio (< 17% vowels on length >= 5)
+        // SOFT RULE 3: Low vowel ratio (Zero vowels on 4+ chars, or < 12% on 7+ chars)
         if (!empty($criteria['check_vowels'])) {
             $cleanFn = preg_replace('/[^a-zA-ZÀ-ÿ]/u', '', $fn);
             $cleanLn = preg_replace('/[^a-zA-ZÀ-ÿ]/u', '', $ln);
@@ -208,62 +256,52 @@ class SpamDetector
             $lnLen = mb_strlen($cleanLn, 'UTF-8');
             $vowelRegex = '/[aeiouyàâäéèêëîïôöùûüÿAEIOUYÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ]/u';
 
-            if ($fnLen >= 5) {
-                $vowels = preg_match_all($vowelRegex, $cleanFn);
-                if ($vowels === 0 || ($vowels / $fnLen) < 0.17) {
-                    $reasons[] = 'Prénom anormal sans voyelles suffisantes';
-                }
+            // Real French/European names like Franck (1/6 = 16.7%), Charles (2/7 = 28%), Blesch are completely safe
+            if ($fnLen >= 4 && preg_match_all($vowelRegex, $cleanFn) === 0) {
+                $softReasons[] = 'Prénom anormal sans aucune voyelle';
+            } elseif ($fnLen >= 7 && (preg_match_all($vowelRegex, $cleanFn) / $fnLen) < 0.12) {
+                $softReasons[] = 'Prénom anormal avec taux de voyelles critique';
             }
-            if ($lnLen >= 5) {
-                $vowels = preg_match_all($vowelRegex, $cleanLn);
-                if ($vowels === 0 || ($vowels / $lnLen) < 0.17) {
-                    $reasons[] = 'Nom anormal sans voyelles suffisantes';
-                }
+
+            if ($lnLen >= 4 && preg_match_all($vowelRegex, $cleanLn) === 0) {
+                $softReasons[] = 'Nom anormal sans aucune voyelle';
+            } elseif ($lnLen >= 7 && (preg_match_all($vowelRegex, $cleanLn) / $lnLen) < 0.12) {
+                $softReasons[] = 'Nom anormal avec taux de voyelles critique';
             }
         }
 
-        // Rule 6: Abnormal consonant prefix at start
+        // SOFT RULE 4: Abnormal consonant prefix at start (excluding valid prefixes like sch, chr, str, etc.)
         if (!empty($criteria['check_consonant_start'])) {
             $suspiciousStartRegex = '/^[bcdfghjklmnpqrstvwxz]{3,}/iu';
-            if ((preg_match($suspiciousStartRegex, $fn) && !preg_match('/^(chr|str|thr|scr|spl|spr|phr)/i', $fn)) ||
-                (preg_match($suspiciousStartRegex, $ln) && !preg_match('/^(chr|str|thr|scr|spl|spr|phr)/i', $ln))) {
-                $reasons[] = 'Début de nom avec consonnes atypiques';
+            $validPrefixes = '/^(sch|chr|str|thr|scr|spl|spr|phr|st|sc|cl|cr|fl|fr|gl|gr|pl|pr|tr|vr|br|bl|dr)/i';
+            if ((preg_match($suspiciousStartRegex, $fn) && !preg_match($validPrefixes, $fn)) ||
+                (preg_match($suspiciousStartRegex, $ln) && !preg_match($validPrefixes, $ln))) {
+                $softReasons[] = 'Début de nom avec consonnes atypiques';
             }
         }
 
-        // Rule 7: Same firstname and lastname
-        if (!empty($criteria['check_same_name'])) {
-            if (mb_strtolower($fn, 'UTF-8') === mb_strtolower($ln, 'UTF-8') && mb_strlen($fn, 'UTF-8') >= 4) {
-                if (preg_match('/(test|demo|admin|fake|asdf|qwerty)/i', $fn) || preg_match('/[a-z][A-Z]/', $fn)) {
-                    $reasons[] = 'Nom et prénom identiques suspects';
-                }
-            }
-        }
-
-        // Rule 8: Disposable email services
-        if (!empty($criteria['check_disposable'])) {
-            if (preg_match('/@(test\.fr|example\.com|mailinator\.com|trashmail\.|guerrillamail\.|10minutemail\.|tempmail\.|dispostable\.|yopmail\.)/i', $email)) {
-                $reasons[] = 'Email jetable ou domaine de test';
-            }
-        }
-
-        // Rule 9: Suspicious TLDs (.ru, .su, .xyz, .top, .click, etc.)
-        if (!empty($criteria['check_tlds'])) {
-            if (preg_match('/\.(ru|su|xyz|top|click|link|work|loan|date)$/i', $email)) {
-                $tld = substr(strrchr($email, '.'), 1);
-                $reasons[] = 'Extension de domaine à haut risque (.' . $tld . ')';
-            }
-        }
-
-        // Rule 10: Randomized email username (e.g. ffuexvizct85@hotmail.com)
+        // SOFT RULE 5: Randomized email username (e.g. ffuexvizct85@hotmail.com)
         if (!empty($criteria['check_random_email'])) {
             $emailUser = strtolower(strstr($email, '@', true));
             if (preg_match('/^[bcdfghjklmnpqrstvwxz]{7,15}[0-9]{2,4}$/', $emailUser)) {
-                $reasons[] = 'Adresse email générée par bot (' . $emailUser . ')';
+                $softReasons[] = 'Adresse email générée par bot (' . $emailUser . ')';
             }
         }
 
-        return !empty($reasons);
+        // Final Decision:
+        // 1. If ANY hard reason is present -> 100% SPAM
+        if (!empty($hardReasons)) {
+            $reasons = array_merge($hardReasons, $softReasons);
+            return true;
+        }
+
+        // 2. Soft heuristic reasons: REQUIRE AT LEAST 2 WEAK SIGNALS to prevent false positives on real people
+        if (count($softReasons) >= 2) {
+            $reasons = $softReasons;
+            return true;
+        }
+
+        return false;
     }
 
     /**

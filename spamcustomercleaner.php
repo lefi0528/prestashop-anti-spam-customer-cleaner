@@ -51,7 +51,8 @@ class SpamCustomerCleaner extends Module
             'SCC_WHITELIST' => "lefi0\ngenisoft\nadmin\nbiggyfood",
             'SCC_BATCH_SIZE' => 250,
             'SCC_HONEYPOT_ACTIVE' => 1,
-            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/',
+            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/b/et2gH',
+            'SCC_FEXA_URL' => 'https://fexaai.com/',
         ];
 
         foreach ($defaultConfigs as $key => $val) {
@@ -205,7 +206,7 @@ class SpamCustomerCleaner extends Module
             if (SpamDetector::isPro()) {
                 $output .= $this->displayConfirmation($this->l('Félicitations ! Votre licence PRO a été validée avec succès. Toutes les fonctionnalités illimitées sont désormais débloquées !'));
             } else {
-                $output .= $this->displayError($this->l('Clé de licence non reconnue. Veuillez vérifier votre saisie ou commander votre licence sur notre boutique https://shop.genisoft.fr/.'));
+                $output .= $this->displayError($this->l('Clé de licence non reconnue. Veuillez vérifier votre saisie ou commander votre licence sur notre boutique https://shop.genisoft.fr/b/et2gH.'));
             }
         }
 
@@ -228,6 +229,11 @@ class SpamCustomerCleaner extends Module
             $submittedShopUrl = trim(Tools::getValue('SCC_SHOP_URL'));
             if (!empty($submittedShopUrl)) {
                 Configuration::updateValue('SCC_SHOP_URL', $submittedShopUrl);
+            }
+
+            $submittedFexaUrl = trim(Tools::getValue('SCC_FEXA_URL'));
+            if (!empty($submittedFexaUrl)) {
+                Configuration::updateValue('SCC_FEXA_URL', $submittedFexaUrl);
             }
 
             $output .= $this->displayConfirmation($this->l('Paramètres de détection mis à jour avec succès.'));
@@ -270,7 +276,12 @@ class SpamCustomerCleaner extends Module
 
         $shopUrl = Configuration::get('SCC_SHOP_URL');
         if (empty($shopUrl)) {
-            $shopUrl = 'https://shop.genisoft.fr/';
+            $shopUrl = 'https://shop.genisoft.fr/b/et2gH';
+        }
+
+        $fexaUrl = Configuration::get('SCC_FEXA_URL');
+        if (empty($fexaUrl)) {
+            $fexaUrl = 'https://fexaai.com/';
         }
 
         $licenseKey = Configuration::get('SCC_LICENSE_KEY');
@@ -282,6 +293,7 @@ class SpamCustomerCleaner extends Module
             'stats' => $stats,
             'is_pro' => SpamDetector::isPro(),
             'shop_url' => $shopUrl,
+            'fexa_url' => $fexaUrl,
             'license_key' => $licenseKey,
             'cron_url' => $cronUrl,
             'free_limit' => SpamDetector::FREE_DELETE_LIMIT,

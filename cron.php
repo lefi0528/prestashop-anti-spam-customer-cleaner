@@ -28,7 +28,7 @@ if (empty($token) || $token !== $expectedToken) {
 if (!SpamDetector::isPro()) {
     $shopUrl = Configuration::get('SCC_SHOP_URL');
     if (empty($shopUrl)) {
-        $shopUrl = 'https://shop.genisoft.fr/';
+        $shopUrl = 'https://shop.genisoft.fr/b/et2gH';
     }
 
     http_response_code(402);

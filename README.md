@@ -1,18 +1,20 @@
 # 🛡️ PrestaShop SpamCustomerCleaner PRO — Anti-Spam & Bot Accounts Cleaner
 
-[![PrestaShop Compatibility](https://img.shields.io/badge/PrestaShop-1.7%20%7C%208.x%20%7C%209.x-blue.svg?logo=prestashop)](https://shop.genisoft.fr/)
-[![PHP Compatibility](https://img.shields.io/badge/PHP-7.2%20--%208.3%2B-777BB4.svg?logo=php)](https://shop.genisoft.fr/)
-[![License](https://img.shields.io/badge/License-Freemium%20%2F%20Commercial-brightgreen.svg)](https://shop.genisoft.fr/)
-[![Author](https://img.shields.io/badge/Author-Genisoft%20web-orange.svg)](https://shop.genisoft.fr/)
-[![Multilingual](https://img.shields.io/badge/Languages-English%20%7C%20Fran%C3%A7ais-success.svg)](https://shop.genisoft.fr/)
+[![PrestaShop Compatibility](https://img.shields.io/badge/PrestaShop-1.7%20%7C%208.x%20%7C%209.x%20Stable-blue.svg?logo=prestashop)](https://shop.genisoft.fr/b/et2gH)
+[![PHP Compatibility](https://img.shields.io/badge/PHP-7.2%20--%208.3%2B-777BB4.svg?logo=php)](https://shop.genisoft.fr/b/et2gH)
+[![License](https://img.shields.io/badge/License-Freemium%20%2F%20Commercial-brightgreen.svg)](https://shop.genisoft.fr/b/et2gH)
+[![Author](https://img.shields.io/badge/Author-Genisoft%20web-orange.svg)](https://shop.genisoft.fr/b/et2gH)
+[![Ecosystem](https://img.shields.io/badge/Ecosystem-Fexa%20AI-10b981.svg)](https://fexaai.com/)
+[![Multilingual](https://img.shields.io/badge/Languages-English%20%7C%20Fran%C3%A7ais-success.svg)](https://shop.genisoft.fr/b/et2gH)
 
-> **The ultimate high-performance anti-spam module for PrestaShop.** Accurately detect, safely bulk clean thousands of fake spam accounts, addresses, and contact form spam with automated CRON autopilot. Zero risk to legitimate buyers.
+> **The ultimate high-performance anti-spam module for PrestaShop 1.7, 8.x, and 9.x Stable.** Accurately detect, safely bulk clean thousands of fake spam accounts, addresses, and contact form spam with automated CRON autopilot. Zero risk to legitimate buyers.
 
 ---
 
 ### 🌐 Language / Langue
 - [🇬🇧 English Version](#-english-version)
 - [🇫🇷 Version Française](#-version-française)
+- [⚡ Fexa AI Copilot](#-discover-fexa-ai)
 
 ---
 
@@ -79,7 +81,20 @@ Every day, thousands of automated malicious bots register on PrestaShop e-commer
    - Select `spamcustomercleaner.zip`.
 3. Open the module configuration:
    - Click **Run Full Scan** to diagnose your customer base.
-   - Upgrade to the PRO version on our store [shop.genisoft.fr](https://shop.genisoft.fr/) to unlock unlimited deletion, automated CRON, and contact form cleaning.
+   - Upgrade to the PRO version on our official store [shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH) to unlock unlimited deletion, automated CRON, and contact form cleaning.
+
+---
+
+<a name="discover-fexa-ai"></a>
+### ⚡ Discover Fexa AI (SEO & AI Citations Engine for PrestaShop)
+Looking to accelerate real sales after eliminating spam?  
+Discover **[Fexa AI](https://fexaai.com/)**, our autonomous AI SEO & GEO citations copilot for PrestaShop:
+- 🎯 **Unlock Dormant Search Console Positions** (Striking Distance keywords).
+- 🤖 **GEO Radar & AI Citations**: Get your products recommended by ChatGPT, Perplexity & Claude.
+- ⚔️ **Conflict Arbitrage Studio**: Eliminate keyword cannibalization in 1 click.
+- 🛡️ **0 ms MySQL Impact**: 100% secure Cloud-computed optimization with 1-click rollback.
+
+👉 **[Start your Free PrestaShop SEO Audit on fexaai.com](https://fexaai.com/)**
 
 ---
 
@@ -94,7 +109,7 @@ Chaque jour, des milliers de robots malveillants créent de faux comptes sur vot
 - **Adresses postales de spam et paniers orphelins** qui alourdissent inutilement votre base de données SQL.
 - **Spams et phishing dans le formulaire de contact SAV**.
 
-**SpamCustomerCleaner** développé par **Genisoft web** est le module de référence pour nettoyer, optimiser et protéger durablement votre boutique PrestaShop 1.7, 8 et 9.
+**SpamCustomerCleaner** développé par **Genisoft web** est le module de référence pour nettoyer, optimiser et protéger durablement votre boutique **PrestaShop 1.7, 8.x et 9.x Stable**.
 
 ---
 
@@ -123,15 +138,28 @@ Chaque jour, des milliers de robots malveillants créent de faux comptes sur vot
 
 ---
 
+### ⚡ Découvrez Fexa AI (Copilote SEO & Citations IA pour PrestaShop)
+Après avoir nettoyé vos spams, développez vos ventes réelles !  
+Découvrez **[Fexa AI](https://fexaai.com/)**, le copilote SEO autonome pour PrestaShop :
+- 🎯 **Débloquez vos positions dormantes** (Mots-clés en page 2 prêts à percer dans le TOP 3).
+- 🤖 **GEO Radar & Citations IA** : Faites recommander vos produits par ChatGPT, Perplexity et Claude.
+- ⚔️ **Arbitrage de la cannibalisation** : Corrigez les doublons SEO qui freinent votre catalogue.
+- 🛡️ **0 ms d'impact MySQL** : Connecteur ultra-léger, calculs 100% Cloud et rollback en 1 clic.
+
+👉 **[Lancer un Audit SEO Gratuit sur fexaai.com](https://fexaai.com/)**
+
+---
+
 ### 🛒 Obtenir la Licence PRO
-Commandez votre licence instantanée sur notre boutique officielle :
-👉 **[https://shop.genisoft.fr/](https://shop.genisoft.fr/)**
+Commandez votre licence instantanée sur notre boutique officielle :  
+👉 **[https://shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)**
 
 Votre clé de licence vous est remise immédiatement après votre commande pour débloquer votre module en 1 clic.
 
 ---
 
 ### 👨‍💻 Auteur & Support
-- **Développeur** : [Genisoft web](https://shop.genisoft.fr/)
-- **Contact & Support** : [https://shop.genisoft.fr/](https://shop.genisoft.fr/)
-- **Compatibilité** : PrestaShop 1.7.0.0 à 9.x | PHP 7.2 à 8.3+
+- **Développeur** : [Genisoft web](https://shop.genisoft.fr/b/et2gH)
+- **Écosystème IA** : [Fexa AI](https://fexaai.com/)
+- **Contact & Support** : [https://shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)
+- **Compatibilité** : PrestaShop 1.7.0.0 à 9.x Stable | PHP 7.2 à 8.3+

@@ -24,7 +24,7 @@
                         {/if}
                     </div>
                     <p class="text-muted">
-                        {l s='Développé par' mod='spamcustomercleaner'} <strong>Genisoft web</strong> &bull; {l s='Nettoyage sécurisé des faux comptes, adresses et messages avec protection absolue de vos vrais clients.' mod='spamcustomercleaner'}
+                        {l s='Développé par' mod='spamcustomercleaner'} <strong>Genisoft web</strong> &bull; {l s='Écosystème' mod='spamcustomercleaner'} <a href="{$fexa_url|escape:'html':'UTF-8'}" target="_blank" style="color: #10b981; font-weight: bold; text-decoration: none;">Fexa AI</a> &bull; {l s='Nettoyage sécurisé des faux comptes, adresses et messages avec protection absolue de vos vrais clients.' mod='spamcustomercleaner'}
                     </p>
                 </div>
             </div>
@@ -133,6 +133,7 @@
         <li><a href="#tab-contact" data-toggle="tab"><i class="icon-envelope"></i> {l s='Messages Contact Spam' mod='spamcustomercleaner'} {if !$is_pro}<span class="badge scc-tab-pro-tag">PRO</span>{/if}</a></li>
         <li><a href="#tab-cron" data-toggle="tab"><i class="icon-time"></i> {l s='Pilote Automatique (CRON)' mod='spamcustomercleaner'} {if !$is_pro}<span class="badge scc-tab-pro-tag">PRO</span>{/if}</a></li>
         <li><a href="#tab-settings" data-toggle="tab"><i class="icon-cogs"></i> {l s='Paramètres & Sécurité' mod='spamcustomercleaner'}</a></li>
+        <li><a href="#tab-fexa" data-toggle="tab" style="color: #059669; font-weight: 700;"><span style="color: #10b981; margin-right: 3px;">⚡</span> {l s='Fexa AI (SEO & Citations IA)' mod='spamcustomercleaner'} <span class="badge" style="background:#10b981; color:#fff; font-size:10px;">{l s='DÉCOUVRIR' mod='spamcustomercleaner'}</span></a></li>
     </ul>
 
     <div class="tab-content" style="padding-top: 15px;">
@@ -464,6 +465,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-lg-4">{l s='Lien Plateforme Fexa AI' mod='spamcustomercleaner'}</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="SCC_FEXA_URL" class="form-control" value="{$fexa_url|escape:'html':'UTF-8'}">
+                                        <span class="help-block">{l s='Lien vers votre plateforme SaaS Fexa AI (SEO & Citations IA)' mod='spamcustomercleaner'}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-lg-4">{l s='Taille des lots (Batch)' mod='spamcustomercleaner'}</label>
                                     <div class="col-lg-8">
                                         <input type="number" name="SCC_BATCH_SIZE" class="form-control" value="{$cfg_batch_size|intval}" min="50" max="1000">
@@ -478,6 +486,83 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: FEXA AI MARKETING & ECOSYSTEM -->
+        <div class="tab-pane" id="tab-fexa">
+            <div class="panel scc-fexa-panel" style="border: 1px solid #10b981; border-radius: 8px; overflow: hidden; background: #0b132b; color: #fff; padding: 0;">
+                <div class="scc-fexa-header" style="background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); padding: 35px 30px; border-bottom: 1px solid #047857;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="width: 50px; height: 50px; background: #10b981; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; color: #fff; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">F</div>
+                                <div>
+                                    <h2 style="margin: 0; color: #fff; font-size: 28px; font-weight: 800; letter-spacing: -0.5px;">Fexa <span style="color: #34d399;">AI</span></h2>
+                                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #6ee7b7; font-weight: 700;">{l s='Copilote SEO Autonome & Moteur de Citations IA pour PrestaShop' mod='spamcustomercleaner'}</span>
+                                </div>
+                            </div>
+                            <h3 style="color: #f0fdf4; font-size: 22px; font-weight: 700; margin-top: 15px; line-height: 1.3;">
+                                {l s='Dominez Google. Faites recommander vos produits par ChatGPT & Perplexity.' mod='spamcustomercleaner'}
+                            </h3>
+                            <p style="color: #a7f3d0; font-size: 14px; margin-top: 10px; max-width: 650px; line-height: 1.5;">
+                                {l s='Après avoir nettoyé vos spams, développez vos ventes réelles ! Fexa AI connecte directement votre Google Search Console pour propulser votre catalogue en première page et dans les moteurs IA.' mod='spamcustomercleaner'}
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-right" style="padding-top: 20px;">
+                            <a href="{$fexa_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-lg" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800; font-size: 15px; padding: 14px 24px; border-radius: 8px; border: none; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;">
+                                <i class="icon-rocket" style="margin-right: 5px;"></i> {l s='Lancer un Audit SEO Gratuit' mod='spamcustomercleaner'} ➔
+                            </a>
+                            <div style="margin-top: 10px; color: #6ee7b7; font-size: 12px;">
+                                <i class="icon-check"></i> {l s='Module PrestaShop 100% gratuit & sans carte bancaire' mod='spamcustomercleaner'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scc-fexa-body" style="padding: 30px; background: #0f172a;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🎯</div>
+                                <h4 style="color: #38bdf8; font-weight: 700; margin-top: 0;">{l s='Striking Distance (Positions Dormantes)' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Débloquez immédiatement le chiffre d\'affaires endormi de votre boutique en identifiant les mots-clés positionnés en bas de page 1 ou en page 2 prêts à grimper dans le TOP 3.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🤖</div>
+                                <h4 style="color: #a855f7; font-weight: 700; margin-top: 0;">{l s='GEO Radar & Citations IA' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Les acheteurs demandent désormais des conseils d\'achat directement à ChatGPT, Perplexity et Claude. Fexa AI rend votre boutique éligible pour être citée et recommandée n°1.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">⚡</div>
+                                <h4 style="color: #34d399; font-weight: 700; margin-top: 0;">{l s='Zéro Impact Serveur & Rollback 1-Clic' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Connecteur PrestaShop ultra-léger (0 ms d\'impact MySQL). Calculs 100% Cloud sécurisés, sauvegarde automatique et rollback instantané de vos fiches produits.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <strong style="color: #34d399; font-size: 15px;"><i class="icon-info-circle"></i> {l s='Compatibilité Totale PrestaShop' mod='spamcustomercleaner'} :</strong>
+                            <span style="color: #e2e8f0; font-size: 13px; margin-left: 5px;">{l s='PrestaShop 1.7.8, 8.x et 9.x Stable | PHP 7.4 à 8.3+' mod='spamcustomercleaner'}</span>
+                        </div>
+                        <div>
+                            <a href="{$fexa_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-success" style="background: #10b981; border: none; font-weight: 700; padding: 8px 18px;">
+                                {l s='Découvrir fexaai.com' mod='spamcustomercleaner'} ➔
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

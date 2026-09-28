@@ -257,9 +257,43 @@ class SpamCustomerCleaner extends Module
             Configuration::updateValue('SCC_CRON_TOKEN', $cronToken);
         }
 
+        // Auto-register AdminSpamCustomerCleaner Tab if missing (e.g. module updated without reinstall)
+        if (!(int) Tab::getIdFromClassName('AdminSpamCustomerCleaner')) {
+            $this->installTab('AdminParentCustomer', 'AdminSpamCustomerCleaner', 'Scanner Anti-Spam');
+        }
+
         $stats = SpamDetector::getGlobalStats();
-        $currentToken = Tools::getValue('token');
-        $currentAjaxUrl = AdminController::$currentIndex . '&configure=' . $this->name . '&token=' . $currentToken . '&ajax=1';
+        $sccToken = Tools::getAdminTokenLite('AdminSpamCustomerCleaner');
+
+        $currentAjaxUrl = '';
+        if (isset($this->context->link) && is_object($this->context->link)) {
+            try {
+                $currentAjaxUrl = $this->context->link->getAdminLink('AdminSpamCustomerCleaner');
+            } catch (Exception $e) {
+                $currentAjaxUrl = '';
+            }
+        }
+
+        if (empty($currentAjaxUrl)) {
+            $adminFolder = defined('_PS_ADMIN_DIR_') ? basename(_PS_ADMIN_DIR_) : 'admin';
+            $currentAjaxUrl = Tools::getShopDomainSsl(true) . __PS_BASE_URI__ . $adminFolder . '/index.php?controller=AdminSpamCustomerCleaner&token=' . $sccToken;
+        }
+
+        if (strpos($currentAjaxUrl, 'ajax=1') === false) {
+            $currentAjaxUrl .= (strpos($currentAjaxUrl, '?') === false ? '?' : '&') . 'ajax=1';
+        }
+        if (strpos($currentAjaxUrl, 'token=') === false) {
+            $currentAjaxUrl .= '&token=' . $sccToken;
+        }
+
+        $configActionUrl = '';
+        if (isset($_SERVER['REQUEST_URI'])) {
+            $configActionUrl = Tools::safeOutput($_SERVER['REQUEST_URI']);
+        }
+        if (empty($configActionUrl) && isset($this->context->link)) {
+            $configActionUrl = $this->context->link->getAdminLink('AdminModules') . '&configure=' . $this->name;
+        }
+
         $cronUrl = Tools::getShopDomainSsl(true) . __PS_BASE_URI__ . 'modules/' . $this->name . '/cron.php?token=' . $cronToken;
 
         $getConfig = function ($key, $default = 1) {
@@ -313,8 +347,8 @@ class SpamCustomerCleaner extends Module
             'module_dir' => $this->_path,
             'module_version' => $this->version . '.' . time(),
             'current_ajax_url' => $currentAjaxUrl,
-            'token' => $currentToken,
-            'config_action_url' => AdminController::$currentIndex . '&configure=' . $this->name . '&token=' . $currentToken,
+            'token' => $sccToken,
+            'config_action_url' => $configActionUrl,
             'cfg_check_urls' => $getConfig('SCC_CHECK_URLS', 1),
             'cfg_check_keywords' => $getConfig('SCC_CHECK_KEYWORDS', 1),
             'cfg_check_mixed_case' => $getConfig('SCC_CHECK_MIXED_CASE', 1),

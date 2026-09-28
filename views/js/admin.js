@@ -100,6 +100,8 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {
+                    ajax: 1,
+                    token: typeof sccToken !== 'undefined' ? sccToken : '',
                     action: 'activate_license',
                     license_key: key
                 },
@@ -114,6 +116,7 @@
                 },
                 error: function(xhr, status, err) {
                     $btn.prop('disabled', false).html('<i class="icon-key"></i> Activer');
+                    console.error('[SpamCustomerCleaner] License activation error:', xhr.status, xhr.responseText);
                     alert(((window.sccLang && sccLang.server_error) || 'Erreur lors de la validation : ') + err);
                 }
             });
@@ -162,6 +165,8 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {
+                    ajax: 1,
+                    token: typeof sccToken !== 'undefined' ? sccToken : '',
                     action: 'scan_contact'
                 },
                 success: function(res) {
@@ -172,6 +177,7 @@
                 },
                 error: function(xhr, status, err) {
                     $btn.prop('disabled', false).html('<i class="icon-search"></i> Analyser les Messages');
+                    console.error('[SpamCustomerCleaner] Scan contact error:', xhr.status, xhr.responseText);
                     alert('Erreur : ' + err);
                 }
             });
@@ -204,6 +210,8 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {
+                    ajax: 1,
+                    token: typeof sccToken !== 'undefined' ? sccToken : '',
                     action: 'delete_contact_batch',
                     thread_ids: ids
                 },
@@ -216,6 +224,10 @@
                     } else {
                         alert(res.error || 'Erreur inconnue');
                     }
+                },
+                error: function(xhr, status, err) {
+                    console.error('[SpamCustomerCleaner] Delete contact batch error:', xhr.status, xhr.responseText);
+                    alert('Erreur : ' + err);
                 }
             });
         });
@@ -242,6 +254,8 @@
             type: 'POST',
             dataType: 'json',
             data: {
+                ajax: 1,
+                token: typeof sccToken !== 'undefined' ? sccToken : '',
                 action: 'scan'
             },
             success: function(res) {
@@ -271,7 +285,14 @@
                 $('#scan-loading').hide();
                 $('#btn-start-scan').prop('disabled', false).html('<i class="icon-search"></i> Lancer le Scan Complet');
                 $('#scan-placeholder').show();
-                alert('Erreur serveur lors de la communication AJAX : ' + error);
+                console.error('[SpamCustomerCleaner] Scan AJAX error:', xhr.status, xhr.responseText);
+                var detail = error;
+                if (xhr.status === 403 || xhr.status === 401) {
+                    detail = 'Session expirée ou jeton de sécurité invalide. Veuillez recharger la page.';
+                } else if (xhr.responseText && xhr.responseText.indexOf('<!DOCTYPE') !== -1) {
+                    detail = 'Le serveur a renvoyé une page HTML inattendue (code HTTP ' + xhr.status + ').';
+                }
+                alert('Erreur serveur lors de la communication AJAX : ' + detail);
             }
         });
     }
@@ -473,6 +494,8 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {
+                    ajax: 1,
+                    token: typeof sccToken !== 'undefined' ? sccToken : '',
                     action: 'delete_batch',
                     customer_ids: batch,
                     delete_addresses: deleteAddresses
@@ -557,6 +580,8 @@
             type: 'POST',
             dataType: 'json',
             data: {
+                ajax: 1,
+                token: typeof sccToken !== 'undefined' ? sccToken : '',
                 action: 'delete_single',
                 id_customer: idCustomer,
                 delete_addresses: deleteAddresses

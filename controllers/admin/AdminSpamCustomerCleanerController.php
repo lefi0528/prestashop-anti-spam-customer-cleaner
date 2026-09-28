@@ -118,4 +118,85 @@ class AdminSpamCustomerCleanerController extends ModuleAdminController
             ]));
         }
     }
+
+    /**
+     * AJAX Action: Validate and activate license key
+     */
+    public function ajaxProcessActivateLicense()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        $key = trim(Tools::getValue('license_key'));
+        Configuration::updateValue('SCC_LICENSE_KEY', $key);
+
+        if (SpamDetector::isPro()) {
+            die(json_encode([
+                'success' => true,
+                'is_pro' => true,
+                'message' => 'Licence PRO activée avec succès !',
+            ]));
+        } else {
+            die(json_encode([
+                'success' => false,
+                'is_pro' => false,
+                'error' => 'Format de clé de licence invalide.',
+            ]));
+        }
+    }
+
+    /**
+     * AJAX Action: Scan contact spam threads
+     */
+    public function ajaxProcessScanContact()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        try {
+            $threads = SpamDetector::scanContactSpam();
+            die(json_encode([
+                'success' => true,
+                'total_spam_contact' => count($threads),
+                'items' => $threads,
+                'is_pro' => SpamDetector::isPro(),
+            ]));
+        } catch (Exception $e) {
+            die(json_encode([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]));
+        }
+    }
+
+    /**
+     * AJAX Action: Delete batch of contact spam threads
+     */
+    public function ajaxProcessDeleteContactBatch()
+    {
+        header('Content-Type: application/json; charset=utf-8');
+
+        if (!SpamDetector::isPro()) {
+            die(json_encode([
+                'success' => false,
+                'upgrade_required' => true,
+                'error' => 'Le nettoyage automatique des messages contact requiert la version PRO.',
+            ]));
+        }
+
+        try {
+            $threadIds = Tools::getValue('thread_ids');
+            if (empty($threadIds) || !is_array($threadIds)) {
+                die(json_encode(['success' => false, 'error' => 'Aucun message sélectionné.']));
+            }
+            $deleted = SpamDetector::deleteContactSpamBatch($threadIds);
+            die(json_encode([
+                'success' => true,
+                'deleted_count' => $deleted,
+            ]));
+        } catch (Exception $e) {
+            die(json_encode([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]));
+        }
+    }
 }

@@ -99,13 +99,16 @@ class SpamDetector
 
         // Contact spam stats
         $totalContactThreads = (int) $db->getValue('SELECT COUNT(*) FROM `' . _DB_PREFIX_ . 'customer_thread`');
-        $contactSpamCount = (int) $db->getValue('
-            SELECT COUNT(DISTINCT ct.id_customer_thread) 
-            FROM `' . _DB_PREFIX_ . 'customer_thread` ct
-            JOIN `' . _DB_PREFIX_ . 'customer_message` cm ON ct.id_customer_thread = cm.id_customer_thread
-            WHERE cm.message REGEXP "http|www\\.|talkwithwebvisitor|seo-package|dating|viagra|casino"
-               OR ct.email LIKE "%.ru" OR ct.email LIKE "%.xyz"
-        ');
+        $contactSpamCount = 0;
+        if ($totalContactThreads > 0) {
+            $contactSpamCount = (int) $db->getValue('
+                SELECT COUNT(DISTINCT ct.id_customer_thread) 
+                FROM `' . _DB_PREFIX_ . 'customer_thread` ct
+                JOIN `' . _DB_PREFIX_ . 'customer_message` cm ON ct.id_customer_thread = cm.id_customer_thread
+                WHERE cm.message REGEXP "http|www\\.|talkwithwebvisitor|seo-package|dating|viagra|casino"
+                   OR ct.email LIKE "%.ru" OR ct.email LIKE "%.xyz"
+            ');
+        }
 
         return [
             'total_customers' => $totalCustomers,
@@ -280,9 +283,16 @@ class SpamDetector
         $db = Db::getInstance();
         $sql = '
             SELECT c.id_customer, c.firstname, c.lastname, c.email, c.date_add, c.active,
-                   (SELECT COUNT(*) FROM `' . _DB_PREFIX_ . 'address` a WHERE a.id_customer = c.id_customer) as nb_addr,
-                   (SELECT COUNT(*) FROM `' . _DB_PREFIX_ . 'orders` o WHERE o.id_customer = c.id_customer) as nb_orders
+                   COALESCE(a.nb_addr, 0) AS nb_addr,
+                   0 AS nb_orders
             FROM `' . _DB_PREFIX_ . 'customer` c
+            LEFT JOIN (
+                SELECT DISTINCT id_customer FROM `' . _DB_PREFIX_ . 'orders` WHERE id_customer > 0
+            ) o ON o.id_customer = c.id_customer
+            LEFT JOIN (
+                SELECT id_customer, COUNT(*) AS nb_addr FROM `' . _DB_PREFIX_ . 'address` WHERE id_customer > 0 GROUP BY id_customer
+            ) a ON a.id_customer = c.id_customer
+            WHERE o.id_customer IS NULL
             ORDER BY c.id_customer DESC
         ';
 

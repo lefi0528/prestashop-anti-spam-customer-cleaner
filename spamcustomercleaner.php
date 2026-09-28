@@ -51,7 +51,8 @@ class SpamCustomerCleaner extends Module
             'SCC_WHITELIST' => "lefi0\ngenisoft\nadmin\nbiggyfood",
             'SCC_BATCH_SIZE' => 250,
             'SCC_HONEYPOT_ACTIVE' => 1,
-            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/b/et2gH',
+            'SCC_SHOP_URL' => 'https://shop.genisoft.fr/',
+            'SCC_SECURITY_URL' => 'https://shop.genisoft.fr/b/et2gH',
             'SCC_FEXA_URL' => 'https://fexaai.com/',
         ];
 
@@ -206,7 +207,7 @@ class SpamCustomerCleaner extends Module
             if (SpamDetector::isPro()) {
                 $output .= $this->displayConfirmation($this->l('Félicitations ! Votre licence PRO a été validée avec succès. Toutes les fonctionnalités illimitées sont désormais débloquées !'));
             } else {
-                $output .= $this->displayError($this->l('Clé de licence non reconnue. Veuillez vérifier votre saisie ou commander votre licence sur notre boutique https://shop.genisoft.fr/b/et2gH.'));
+                $output .= $this->displayError($this->l('Clé de licence non reconnue. Veuillez vérifier votre saisie ou commander votre licence sur notre boutique https://shop.genisoft.fr/.'));
             }
         }
 
@@ -229,6 +230,11 @@ class SpamCustomerCleaner extends Module
             $submittedShopUrl = trim(Tools::getValue('SCC_SHOP_URL'));
             if (!empty($submittedShopUrl)) {
                 Configuration::updateValue('SCC_SHOP_URL', $submittedShopUrl);
+            }
+
+            $submittedSecurityUrl = trim(Tools::getValue('SCC_SECURITY_URL'));
+            if (!empty($submittedSecurityUrl)) {
+                Configuration::updateValue('SCC_SECURITY_URL', $submittedSecurityUrl);
             }
 
             $submittedFexaUrl = trim(Tools::getValue('SCC_FEXA_URL'));
@@ -276,7 +282,12 @@ class SpamCustomerCleaner extends Module
 
         $shopUrl = Configuration::get('SCC_SHOP_URL');
         if (empty($shopUrl)) {
-            $shopUrl = 'https://shop.genisoft.fr/b/et2gH';
+            $shopUrl = 'https://shop.genisoft.fr/';
+        }
+
+        $securityUrl = Configuration::get('SCC_SECURITY_URL');
+        if (empty($securityUrl)) {
+            $securityUrl = 'https://shop.genisoft.fr/b/et2gH';
         }
 
         $fexaUrl = Configuration::get('SCC_FEXA_URL');
@@ -293,6 +304,7 @@ class SpamCustomerCleaner extends Module
             'stats' => $stats,
             'is_pro' => SpamDetector::isPro(),
             'shop_url' => $shopUrl,
+            'security_url' => $securityUrl,
             'fexa_url' => $fexaUrl,
             'license_key' => $licenseKey,
             'cron_url' => $cronUrl,
@@ -317,6 +329,8 @@ class SpamCustomerCleaner extends Module
             'cfg_batch_size' => $batchSize,
             'cfg_honeypot' => $getConfig('SCC_HONEYPOT_ACTIVE', 1),
             'cfg_shop_url' => $shopUrl,
+            'cfg_security_url' => $securityUrl,
+            'cfg_fexa_url' => $fexaUrl,
         ]);
 
         return $output . $this->display(__FILE__, 'views/templates/admin/configure.tpl');

@@ -133,12 +133,31 @@
         <li><a href="#tab-contact" data-toggle="tab"><i class="icon-envelope"></i> {l s='Messages Contact Spam' mod='spamcustomercleaner'} {if !$is_pro}<span class="badge scc-tab-pro-tag">PRO</span>{/if}</a></li>
         <li><a href="#tab-cron" data-toggle="tab"><i class="icon-time"></i> {l s='Pilote Automatique (CRON)' mod='spamcustomercleaner'} {if !$is_pro}<span class="badge scc-tab-pro-tag">PRO</span>{/if}</a></li>
         <li><a href="#tab-settings" data-toggle="tab"><i class="icon-cogs"></i> {l s='Paramètres & Sécurité' mod='spamcustomercleaner'}</a></li>
+        <li><a href="#tab-security-module" data-toggle="tab" style="color: #dc2626; font-weight: 700;"><i class="icon-shield" style="color: #ef4444; margin-right: 3px;"></i> {l s='Module Anti-Malware' mod='spamcustomercleaner'} <span class="badge" style="background:#ef4444; color:#fff; font-size:10px;">{l s='SÉCURITÉ' mod='spamcustomercleaner'}</span></a></li>
         <li><a href="#tab-fexa" data-toggle="tab" style="color: #059669; font-weight: 700;"><span style="color: #10b981; margin-right: 3px;">⚡</span> {l s='Fexa AI (SEO & Citations IA)' mod='spamcustomercleaner'} <span class="badge" style="background:#10b981; color:#fff; font-size:10px;">{l s='DÉCOUVRIR' mod='spamcustomercleaner'}</span></a></li>
     </ul>
 
     <div class="tab-content" style="padding-top: 15px;">
         <!-- TAB 1: CUSTOMERS SCAN & DELETE -->
         <div class="tab-pane active" id="tab-customers">
+            <!-- Security Upsell Notice -->
+            <div class="alert alert-danger scc-security-upsell-banner" style="background: #fff1f2; border: 1px solid #fecdd3; color: #9f1239; border-radius: 8px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 2px 8px rgba(225, 29, 72, 0.08);">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="font-size: 30px; line-height: 1;">🛡️</div>
+                    <div>
+                        <strong style="color: #be123c; font-size: 14px; font-weight: 700;">{l s='Attaques de bots en cours sur votre boutique ?' mod='spamcustomercleaner'}</strong>
+                        <p style="margin: 3px 0 0 0; font-size: 13px; color: #9f1239;">
+                            {l s='Un afflux massif de faux comptes spam précède fréquemment des tentatives d\'intrusion, injections de webshells ou vol de données bancaires. Auditez l\'intégrité de vos fichiers et de votre base de données avec' mod='spamcustomercleaner'} <strong>Genisoft Security Scanner</strong>.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{$security_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-danger" style="background: #e11d48; border: none; font-weight: 700; padding: 8px 18px; border-radius: 6px; box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);">
+                        <i class="icon-shield"></i> {l s='Découvrir le Scanner Anti-Malware (129 €)' mod='spamcustomercleaner'} ➔
+                    </a>
+                </div>
+            </div>
+
             <div class="panel" id="scan-results-panel">
                 <div class="panel-heading">
                     <i class="icon-list"></i> {l s='Résultats du Scan Anti-Spam Clients' mod='spamcustomercleaner'}
@@ -465,9 +484,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-lg-4">{l s='Lien Module Anti-Malware' mod='spamcustomercleaner'}</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="SCC_SECURITY_URL" class="form-control" value="{$cfg_security_url|escape:'html':'UTF-8'}">
+                                        <span class="help-block">{l s='Lien vers la fiche produit du module Genisoft Security Scanner' mod='spamcustomercleaner'}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-lg-4">{l s='Lien Plateforme Fexa AI' mod='spamcustomercleaner'}</label>
                                     <div class="col-lg-8">
-                                        <input type="text" name="SCC_FEXA_URL" class="form-control" value="{$fexa_url|escape:'html':'UTF-8'}">
+                                        <input type="text" name="SCC_FEXA_URL" class="form-control" value="{$cfg_fexa_url|escape:'html':'UTF-8'}">
                                         <span class="help-block">{l s='Lien vers votre plateforme SaaS Fexa AI (SEO & Citations IA)' mod='spamcustomercleaner'}</span>
                                     </div>
                                 </div>
@@ -490,7 +516,100 @@
             </div>
         </div>
 
-        <!-- TAB 5: FEXA AI MARKETING & ECOSYSTEM -->
+        <!-- TAB 5: GENISOFT SECURITY SCANNER PROMOTION -->
+        <div class="tab-pane" id="tab-security-module">
+            <div class="panel scc-security-panel" style="border: 1px solid #ef4444; border-radius: 8px; overflow: hidden; background: #0f172a; color: #fff; padding: 0;">
+                <div class="scc-security-header" style="background: linear-gradient(135deg, #881337 0%, #4c0519 100%); padding: 35px 30px; border-bottom: 1px solid #9f1239;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                <div style="width: 50px; height: 50px; background: #e11d48; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; color: #fff; box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);">
+                                    <i class="icon-shield"></i>
+                                </div>
+                                <div>
+                                    <h2 style="margin: 0; color: #fff; font-size: 28px; font-weight: 800; letter-spacing: -0.5px;">Genisoft <span style="color: #fb7185;">Security Scanner</span></h2>
+                                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #fecdd3; font-weight: 700;">{l s='Module Anti-Malware & Détection de Persistance pour PrestaShop' mod='spamcustomercleaner'}</span>
+                                </div>
+                            </div>
+                            <h3 style="color: #fff1f2; font-size: 22px; font-weight: 700; margin-top: 15px; line-height: 1.3;">
+                                {l s='Scanner de malware & persistance en BDD 100 % lecture seule (zéro risque pour votre production).' mod='spamcustomercleaner'}
+                            </h3>
+                            <p style="color: #fecdd3; font-size: 14px; margin-top: 10px; max-width: 680px; line-height: 1.5;">
+                                {l s='Les attaques par injection de spams sont les portes d\'entrée des pirates. Protégez immédiatement votre boutique contre les backdoors, webshells, faux administrateurs et renifleurs de cartes bancaires.' mod='spamcustomercleaner'}
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-right" style="padding-top: 20px;">
+                            <div style="display: inline-block; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 15px 20px; text-align: right; margin-bottom: 15px;">
+                                <div style="font-size: 12px; color: #fda4af; text-transform: uppercase; letter-spacing: 1px;">{l s='Tarif Licence Complète' mod='spamcustomercleaner'}</div>
+                                <div style="font-size: 32px; font-weight: 900; color: #fff; line-height: 1.2;">129,00 €</div>
+                            </div>
+                            <br>
+                            <a href="{$security_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-lg" style="background: linear-gradient(135deg, #e11d48, #be123c); color: #fff; font-weight: 800; font-size: 15px; padding: 14px 24px; border-radius: 8px; border: none; box-shadow: 0 8px 25px rgba(225, 29, 72, 0.45); text-transform: uppercase; letter-spacing: 0.5px; display: inline-block;">
+                                <i class="icon-shopping-cart" style="margin-right: 5px;"></i> {l s='Acheter le Module Anti-Malware' mod='spamcustomercleaner'} ➔
+                            </a>
+                            <div style="margin-top: 10px; color: #fecdd3; font-size: 12px;">
+                                <i class="icon-check"></i> {l s='PrestaShop 1.7, 8.x et 9.x Stable (FR & EN)' mod='spamcustomercleaner'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scc-security-body" style="padding: 30px; background: #0b0f19;">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🔍</div>
+                                <h4 style="color: #f87171; font-weight: 700; margin-top: 0;">{l s='Scanner de Fichiers & Backdoors' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Détecte les webshells (c99, r57, WSO, b374k, AntSword, Behinder), payload droppers, injecteurs distants et card-skimmers voleurs de coordonnées bancaires.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🗄️</div>
+                                <h4 style="color: #fb923c; font-weight: 700; margin-top: 0;">{l s='Anti-Réinfection en Base SQL' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Traque les scripts malveillants cachés dans ps_configuration, CMS, produits, faux comptes administrateurs, modules fantômes greffés et tâches CRON pirates.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🛑</div>
+                                <h4 style="color: #34d399; font-weight: 700; margin-top: 0;">{l s='100 % Read-Only & Zéro Risque' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Ne supprime, ne modifie ni n\'exécute aucun fichier en direct. Zéro risque de bloquer votre boutique ou d\'interrompre les ventes de vos clients.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; height: 100%;">
+                                <div style="font-size: 28px; margin-bottom: 10px;">🚨</div>
+                                <h4 style="color: #38bdf8; font-weight: 700; margin-top: 0;">{l s='Scanner de Secours Autonome' mod='spamcustomercleaner'}</h4>
+                                <p style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                                    {l s='Script d\'urgence standalone fourni, capable de scanner et diagnostiquer votre serveur même si PrestaShop affiche une page blanche ou une erreur 500.' mod='spamcustomercleaner'}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: rgba(225, 29, 72, 0.1); border: 1px solid rgba(225, 29, 72, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <strong style="color: #fb7185; font-size: 15px;"><i class="icon-shield"></i> {l s='Sécurité E-commerce Maximale' mod='spamcustomercleaner'} :</strong>
+                            <span style="color: #e2e8f0; font-size: 13px; margin-left: 5px;">{l s='Signature SHA-256 + Heuristique comportementale | Pilote automatique CRON quotidien' mod='spamcustomercleaner'}</span>
+                        </div>
+                        <div>
+                            <a href="{$security_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-danger" style="background: #e11d48; border: none; font-weight: 700; padding: 8px 20px;">
+                                {l s='Commander le module sur shop.genisoft.fr' mod='spamcustomercleaner'} ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: FEXA AI MARKETING & ECOSYSTEM -->
         <div class="tab-pane" id="tab-fexa">
             <div class="panel scc-fexa-panel" style="border: 1px solid #10b981; border-radius: 8px; overflow: hidden; background: #0b132b; color: #fff; padding: 0;">
                 <div class="scc-fexa-header" style="background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); padding: 35px 30px; border-bottom: 1px solid #047857;">

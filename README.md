@@ -1,11 +1,12 @@
 # 🛡️ PrestaShop SpamCustomerCleaner PRO — Anti-Spam & Bot Accounts Cleaner
 
-[![PrestaShop Compatibility](https://img.shields.io/badge/PrestaShop-1.7%20%7C%208.x%20%7C%209.x%20Stable-blue.svg?logo=prestashop)](https://shop.genisoft.fr/b/et2gH)
-[![PHP Compatibility](https://img.shields.io/badge/PHP-7.2%20--%208.3%2B-777BB4.svg?logo=php)](https://shop.genisoft.fr/b/et2gH)
-[![License](https://img.shields.io/badge/License-Freemium%20%2F%20Commercial-brightgreen.svg)](https://shop.genisoft.fr/b/et2gH)
-[![Author](https://img.shields.io/badge/Author-Genisoft%20web-orange.svg)](https://shop.genisoft.fr/b/et2gH)
+[![PrestaShop Compatibility](https://img.shields.io/badge/PrestaShop-1.7%20%7C%208.x%20%7C%209.x%20Stable-blue.svg?logo=prestashop)](https://shop.genisoft.fr/)
+[![PHP Compatibility](https://img.shields.io/badge/PHP-7.2%20--%208.3%2B-777BB4.svg?logo=php)](https://shop.genisoft.fr/)
+[![License](https://img.shields.io/badge/License-Freemium%20%2F%20Commercial-brightgreen.svg)](https://shop.genisoft.fr/)
+[![Author](https://img.shields.io/badge/Author-Genisoft%20web-orange.svg)](https://shop.genisoft.fr/)
+[![Security Partner](https://img.shields.io/badge/Security-Genisoft%20Scanner-red.svg)](https://shop.genisoft.fr/b/et2gH)
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Fexa%20AI-10b981.svg)](https://fexaai.com/)
-[![Multilingual](https://img.shields.io/badge/Languages-English%20%7C%20Fran%C3%A7ais-success.svg)](https://shop.genisoft.fr/b/et2gH)
+[![Multilingual](https://img.shields.io/badge/Languages-English%20%7C%20Fran%C3%A7ais-success.svg)](https://shop.genisoft.fr/)
 
 > **The ultimate high-performance anti-spam module for PrestaShop 1.7, 8.x, and 9.x Stable.** Accurately detect, safely bulk clean thousands of fake spam accounts, addresses, and contact form spam with automated CRON autopilot. Zero risk to legitimate buyers.
 
@@ -14,6 +15,7 @@
 ### 🌐 Language / Langue
 - [🇬🇧 English Version](#-english-version)
 - [🇫🇷 Version Française](#-version-française)
+- [🛡️ Genisoft Security Scanner](#-recommended-security-genisoft-security-scanner)
 - [⚡ Fexa AI Copilot](#-discover-fexa-ai)
 
 ---
@@ -81,7 +83,20 @@ Every day, thousands of automated malicious bots register on PrestaShop e-commer
    - Select `spamcustomercleaner.zip`.
 3. Open the module configuration:
    - Click **Run Full Scan** to diagnose your customer base.
-   - Upgrade to the PRO version on our official store [shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH) to unlock unlimited deletion, automated CRON, and contact form cleaning.
+   - Upgrade to the PRO version on our official store [shop.genisoft.fr](https://shop.genisoft.fr/) to unlock unlimited deletion, automated CRON, and contact form cleaning.
+
+---
+
+<a name="recommended-security-genisoft-security-scanner"></a>
+### 🛡️ Recommended Security: Genisoft Security Scanner (Anti-Malware)
+Mass spam registrations are often precursors to brute-force intrusions, webshell injections, or credit card skimmers.
+Audit your store's security with **[Genisoft Security Scanner](https://shop.genisoft.fr/b/et2gH)** (129,00 €):
+- 🔍 **File & Webshell Scanner**: Detects c99, r57, WSO, b374k, AntSword, Behinder, payload droppers, and credit-card skimmers.
+- 🗄️ **Database Re-Infection Scanner**: Tracks hidden scripts in `ps_configuration`, rogue admin accounts, phantom hooked modules, and malicious CRON jobs.
+- 🛑 **100% Read-Only Safety**: Never modifies, deletes, or executes files in production. Zero risk of store downtime.
+- 🚨 **Standalone Emergency Rescue Scanner**: Works even if PrestaShop is broken with an error 500 or white screen.
+
+👉 **[Get Genisoft Security Scanner on shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)**
 
 ---
 
@@ -138,6 +153,18 @@ Chaque jour, des milliers de robots malveillants créent de faux comptes sur vot
 
 ---
 
+### 🛡️ Module Sécurité Recommandé : Genisoft Security Scanner
+Les vagues de faux comptes spam sont souvent le signe précurseur de tentatives d'intrusion plus profondes, injections de webshells ou vol de données bancaires.  
+Protégez votre boutique avec **[Genisoft Security Scanner](https://shop.genisoft.fr/b/et2gH)** (129,00 €) :
+- 🔍 **Scanner de Fichiers & Backdoors** : Détecte les webshells (c99, r57, WSO, b374k, AntSword, Behinder), droppers et voleurs de cartes bancaires.
+- 🗄️ **Scanner Anti-Réinfection en Base SQL** : Détecte les scripts cachés dans `ps_configuration`, les faux comptes admins, modules fantômes et tâches CRON pirates.
+- 🛑 **Garantie 100 % Lecture Seule (Read-Only)** : Ne modifie aucun fichier. Zéro risque de bloquer votre boutique.
+- 🚨 **Scanner Autonome de Secours (Standalone)** : Utilisable même si PrestaShop affiche une erreur 500.
+
+👉 **[Commander Genisoft Security Scanner sur shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)**
+
+---
+
 ### ⚡ Découvrez Fexa AI (Copilote SEO & Citations IA pour PrestaShop)
 Après avoir nettoyé vos spams, développez vos ventes réelles !  
 Découvrez **[Fexa AI](https://fexaai.com/)**, le copilote SEO autonome pour PrestaShop :
@@ -150,16 +177,17 @@ Découvrez **[Fexa AI](https://fexaai.com/)**, le copilote SEO autonome pour Pre
 
 ---
 
-### 🛒 Obtenir la Licence PRO
+### 🛒 Obtenir la Licence PRO Anti-Spam
 Commandez votre licence instantanée sur notre boutique officielle :  
-👉 **[https://shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)**
+👉 **[https://shop.genisoft.fr/](https://shop.genisoft.fr/)**
 
 Votre clé de licence vous est remise immédiatement après votre commande pour débloquer votre module en 1 clic.
 
 ---
 
 ### 👨‍💻 Auteur & Support
-- **Développeur** : [Genisoft web](https://shop.genisoft.fr/b/et2gH)
+- **Développeur** : [Genisoft web](https://shop.genisoft.fr/)
+- **Module Sécurité** : [Genisoft Security Scanner](https://shop.genisoft.fr/b/et2gH)
 - **Écosystème IA** : [Fexa AI](https://fexaai.com/)
-- **Contact & Support** : [https://shop.genisoft.fr/b/et2gH](https://shop.genisoft.fr/b/et2gH)
+- **Contact & Support** : [https://shop.genisoft.fr/](https://shop.genisoft.fr/)
 - **Compatibilité** : PrestaShop 1.7.0.0 à 9.x Stable | PHP 7.2 à 8.3+

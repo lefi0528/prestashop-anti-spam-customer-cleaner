@@ -22,6 +22,10 @@ class SpamDetector
      */
     public static function isPro()
     {
+        if (defined('SCC_PREMIUM_EDITION') && SCC_PREMIUM_EDITION === true) {
+            return true;
+        }
+
         $key = trim(Configuration::get('SCC_LICENSE_KEY'));
         if (empty($key)) {
             return false;

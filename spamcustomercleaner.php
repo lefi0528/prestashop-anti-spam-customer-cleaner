@@ -19,7 +19,7 @@ class SpamCustomerCleaner extends Module
     {
         $this->name = 'spamcustomercleaner';
         $this->tab = 'administration';
-        $this->version = '1.0.1';
+        $this->version = '1.2.0';
         $this->author = 'Genisoft web';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -126,10 +126,9 @@ class SpamCustomerCleaner extends Module
 
     public function hookDisplayBackOfficeHeader()
     {
-        // Only load assets on our module page or controller
+        // Load stylesheet on module configuration or controller page
         if (Tools::getValue('configure') === $this->name || Tools::getValue('controller') === 'AdminSpamCustomerCleaner') {
             $this->context->controller->addCSS($this->_path . 'views/css/admin.css');
-            $this->context->controller->addJS($this->_path . 'views/js/admin.js');
         }
     }
 

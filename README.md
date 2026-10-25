@@ -6,7 +6,7 @@
 
 Module PrestaShop qui détecte les faux comptes clients créés par des robots (noms illisibles, liens dans les noms, e-mails jetables) et les supprime avec leurs adresses et leurs paniers vides. Les clients qui ont déjà passé commande ne sont jamais détectés ni supprimés.
 
-*English: PrestaShop module that detects and removes fake customer accounts created by bots. Customers with at least one order are never flagged or deleted. This free edition deletes up to 50 accounts; the PRO edition is sold on [shop.genisoft.fr](https://shop.genisoft.fr/).*
+*English: PrestaShop module that detects and removes fake customer accounts created by bots. Customers with at least one order are never flagged or deleted. This free edition deletes up to 50 accounts; the unlimited [SpamCustomerCleaner PRO edition](https://shop.genisoft.fr/7-supprimer-faux-comptes-clients-prestashop-spam-customer-cleaner.html) is sold on shop.genisoft.fr.*
 
 ## Ce que fait l'édition gratuite
 
@@ -29,7 +29,7 @@ Module PrestaShop qui détecte les faux comptes clients créés par des robots (
 | Pilote automatique par cron | non | oui |
 | Support et mises à jour par e-mail | non | oui |
 
-La PRO s'achète sur [shop.genisoft.fr](https://shop.genisoft.fr/) : vous recevez le module PRO et une clé de licence liée au nom de domaine de votre boutique. Elle s'installe par-dessus l'édition gratuite, vos réglages sont conservés.
+**[SpamCustomerCleaner PRO : nettoyeur de faux comptes clients PrestaShop, 49 €](https://shop.genisoft.fr/7-supprimer-faux-comptes-clients-prestashop-spam-customer-cleaner.html)** : suppression illimitée, nettoyage des messages de contact, pilote automatique par cron. Vous recevez le module PRO et une clé de licence liée au nom de domaine de votre boutique. Elle s'installe par-dessus l'édition gratuite, vos réglages sont conservés.
 
 ## Installation
 
@@ -50,4 +50,4 @@ Gratuit pour vos propres boutiques, partage autorisé sans modification. Voir [L
 
 ## Auteur
 
-[Genisoft Web](https://shop.genisoft.fr/) · contact@genisoft.fr
+[Genisoft Web](https://shop.genisoft.fr/) · [Version PRO](https://shop.genisoft.fr/7-supprimer-faux-comptes-clients-prestashop-spam-customer-cleaner.html) · contact@genisoft.fr

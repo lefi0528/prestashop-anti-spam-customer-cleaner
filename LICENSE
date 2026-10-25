@@ -1,0 +1,25 @@
+Genisoft SpamCustomerCleaner - free edition licence / licence de l'édition gratuite
+
+Copyright (c) 2026 Genisoft Web. All rights reserved except as granted below.
+
+EN
+- You may install and use this free edition on any number of your own PrestaShop shops, free of charge.
+- You may copy and share it unmodified, with this LICENSE file, for free.
+- The free edition is limited to 50 deletions. Removing or bypassing that limit, selling it, or presenting a modified
+  copy as a Genisoft product is not allowed. Unlimited deletion, automatic cron cleaning and contact-message cleaning
+  are part of the separate paid PRO edition (https://shop.genisoft.fr/).
+- The module is provided "as is". It permanently deletes customer accounts: back up the database before any cleanup.
+  Genisoft Web cannot be held liable for deletions carried out by the user.
+
+FR
+- Vous pouvez installer et utiliser cette édition gratuite sur autant de boutiques PrestaShop qui vous appartiennent,
+  sans frais.
+- Vous pouvez la copier et la partager sans modification, avec ce fichier LICENSE, gratuitement.
+- L'édition gratuite est limitée à 50 suppressions. Il est interdit de supprimer ou contourner cette limite, de la
+  vendre ou de présenter une copie modifiée comme un produit Genisoft. La suppression illimitée, le nettoyage
+  automatique par cron et le nettoyage des messages de contact appartiennent à l'édition PRO, payante et distincte
+  (https://shop.genisoft.fr/).
+- Le module est fourni en l'état. Il supprime définitivement des comptes clients : sauvegardez la base de données avant
+  tout nettoyage. Genisoft Web ne peut être tenu responsable des suppressions réalisées par l'utilisateur.
+
+Contact : contact@genisoft.fr

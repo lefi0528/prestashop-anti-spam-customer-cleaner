@@ -1,0 +1,300 @@
+/**
+ * SpamCustomerCleaner - Admin Stylesheet
+ * Author: Genisoft web
+ */
+
+.scc-wrapper {
+    margin-bottom: 30px;
+}
+
+.scc-header-panel {
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.scc-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.scc-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.scc-logo-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.scc-title-area h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.scc-title-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.scc-badge-pro {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 12px;
+}
+
+.scc-badge-free {
+    background: #f59e0b;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 12px;
+}
+
+.scc-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Genisoft PRO Upgrade Box */
+.scc-upgrade-box {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #4338ca 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 22px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.25);
+    border: none;
+}
+
+.scc-upgrade-box-active {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    box-shadow: none;
+}
+
+.scc-upgrade-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.scc-star-icon {
+    font-size: 26px;
+}
+
+.scc-pro-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+}
+
+.scc-pro-benefits li {
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #e0e7ff;
+}
+
+.scc-pro-benefits li i {
+    color: #34d399;
+    margin-right: 6px;
+}
+
+.scc-shop-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border: none;
+    color: #fff !important;
+    font-weight: 700;
+    padding: 12px 22px;
+    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.35);
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.scc-shop-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(217, 119, 6, 0.45);
+}
+
+.scc-license-form {
+    max-width: 380px;
+    margin-left: auto;
+}
+
+/* Tabs */
+.scc-nav-tabs {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.scc-nav-tabs > li > a {
+    font-weight: 600;
+    font-size: 14px;
+    color: #64748b;
+    border-radius: 6px 6px 0 0;
+    padding: 10px 18px;
+}
+
+.scc-nav-tabs > li.active > a {
+    color: #2563eb !important;
+    border-bottom: 2px solid #2563eb;
+}
+
+.scc-tab-pro-tag {
+    background: #f59e0b;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    margin-left: 4px;
+    border-radius: 8px;
+}
+
+/* KPI Cards */
+.scc-kpi-row {
+    margin-bottom: 10px;
+}
+
+.scc-kpi-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scc-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.scc-kpi-icon {
+    font-size: 30px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.scc-kpi-total .scc-kpi-icon {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+.scc-kpi-spam .scc-kpi-icon {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.scc-kpi-clean .scc-kpi-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.scc-kpi-addr .scc-kpi-icon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.scc-kpi-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.scc-kpi-label {
+    font-size: 12px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.scc-kpi-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 4px;
+}
+
+/* Toolbar & Filters */
+.scc-toolbar {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.scc-selection-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.inline-checkbox {
+    margin: 0;
+    display: inline-block;
+}
+
+/* Badges */
+.badge-reason {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 12px;
+    margin: 2px;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.badge-addr {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-addr-yes {
+    background: #fef08a;
+    color: #854d0e;
+    border: 1px solid #facc15;
+}
+
+.badge-addr-no {
+    background: #f1f5f9;
+    color: #94a3b8;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>spamcustomercleaner</name>
+    <displayName><![CDATA[Scanner &amp; Nettoyeur Anti-Spam Clients]]></displayName>
+    <version><![CDATA[1.3.0]]></version>
+    <description><![CDATA[D&eacute;tecte avec pr&eacute;cision et supprime en masse les faux comptes spam et leurs adresses sans risque pour vos vrais clients.]]></description>
+    <author><![CDATA[Genisoft web]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+    <min_version><![CDATA[1.7.0.0]]></min_version>
+    <max_version><![CDATA[9.99.99]]></max_version>
+</module>

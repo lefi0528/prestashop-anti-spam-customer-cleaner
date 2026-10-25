@@ -29,7 +29,7 @@ Module PrestaShop qui détecte les faux comptes clients créés par des robots (
 | Pilote automatique par cron | non | oui |
 | Support et mises à jour par e-mail | non | oui |
 
-**[SpamCustomerCleaner PRO : nettoyeur de faux comptes clients PrestaShop, 49 €](https://shop.genisoft.fr/7-supprimer-faux-comptes-clients-prestashop-spam-customer-cleaner.html)** : suppression illimitée, nettoyage des messages de contact, pilote automatique par cron. Vous recevez le module PRO et une clé de licence liée au nom de domaine de votre boutique. Elle s'installe par-dessus l'édition gratuite, vos réglages sont conservés.
+**[SpamCustomerCleaner PRO : nettoyeur de faux comptes clients PrestaShop, 19 €](https://shop.genisoft.fr/7-supprimer-faux-comptes-clients-prestashop-spam-customer-cleaner.html)** : suppression illimitée, nettoyage des messages de contact, pilote automatique par cron. Vous recevez le module PRO et une clé de licence liée au nom de domaine de votre boutique. Elle s'installe par-dessus l'édition gratuite, vos réglages sont conservés.
 
 ## Installation
 
